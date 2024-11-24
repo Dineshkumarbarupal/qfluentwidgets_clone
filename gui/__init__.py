@@ -14,9 +14,9 @@ Examples are available at https://github.com/zhiyiYo/PyQt-Fluent-Widgets/tree/ma
 """
 
 __version__ = "1.7.1"
-__author__ = "zhiyiYo"
+__author__ = "dinesh kumar"
 
-from .components import *
-from .common import *
-from .window import *
-from ._rc import resource
+# from .main import *
+# from .common import *
+# from .window import *
+# from ._rc import resource
