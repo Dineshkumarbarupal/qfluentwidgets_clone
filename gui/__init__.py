@@ -1,4 +1,3 @@
-
 """
 PyQt-Fluent-Widgets
 ===================
@@ -16,7 +15,13 @@ Examples are available at https://github.com/zhiyiYo/PyQt-Fluent-Widgets/tree/ma
 __version__ = "1.7.1"
 __author__ = "dinesh kumar"
 
-# from .main import *
+# from .main_window import *
 # from .common import *
 # from .window import *
 # from ._rc import resource
+
+
+
+
+
+

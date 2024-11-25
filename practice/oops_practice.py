@@ -34,32 +34,39 @@
 #     w.show() 
 #     app.exec()
 
-dict = {"name":"dinesh",
-        "age":19}
+# dict = {"name":"dinesh",
+#         "age":19}
 
-print(dict)
-print(dict["name"])
-print(dict["age"])
+# print(dict)
+# print(dict["name"])
+# print(dict["age"])
 
-print(dict.keys())
-print(dict.values())
+# print(dict.keys())
+# print(dict.values())
 
-new = dict["name"] = "vihaan"
-print(new)
+# new = dict["name"] = "vihaan"
+# print(new)
 
-print(dict)
-
-
-tup = (2,3,4,5,6,7,7,8,8,9)
-print(tup)
-print(type(tup))
-
-set = set()
-print(type(set))
+# print(dict)
 
 
+# tup = (2,3,4,5,6,7,7,8,8,9)
+# print(tup)
+# print(type(tup))
+
+# set = set()
+# print(type(set))
+
+class Main_Window:
+    def __init__(self):
+        print("Hi, How are you brother.")
+        
+window = Main_Window()
 
 
+
+
+       
 
 
 

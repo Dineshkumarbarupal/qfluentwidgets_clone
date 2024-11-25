@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import QFrame,QHBoxLayout,QApplication
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
-from qfluentwidgets import NavigationItemPosition, FluentWindow, SubtitleLabel, setFont
+from qfluentwidgets import NavigationItemPosition, Fluentwindow, SubtitleLabel, setFont
 from qfluentwidgets import FluentIcon as FIF
 
 class Widget(QFrame):
@@ -19,8 +19,7 @@ class Widget(QFrame):
         # Must set a globally unique object name for the sub-interface
         self.setObjectName(text.replace(' ', '-'))
 
-
-class Window(FluentWindow):
+class Window(Fluentwindow):
     """ Main Interface """
 
     def __init__(self):
