@@ -4,35 +4,39 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from qfluentwidgets import NavigationItemPosition, Fluentwindow, SubtitleLabel, setFont
 from qfluentwidgets import FluentIcon as FIF
+from widgets.basic_input.button.button import ToolButtonDemo
 
 class Widget(QFrame):
 
-    def __init__(self, text: str, parent=None):
+    def __init__(self, text: str= "Default text", parent=None):
         super().__init__(parent=parent)
-        self.label = SubtitleLabel(text, self)
+        # self.label = SubtitleLabel(text, self)
         self.hBoxLayout = QHBoxLayout(self)
 
-        setFont(self.label, 24)
-        self.label.setAlignment(Qt.AlignCenter)
-        self.hBoxLayout.addWidget(self.label, 1, Qt.AlignCenter)
+        # setFont(self.label, 24)
+        # self.label.setAlignment(Qt.AlignCenter)
+        # self.hBoxLayout.addWidget(self.label, 1, Qt.AlignCenter)
 
         # Must set a globally unique object name for the sub-interface
-        self.setObjectName(text.replace(' ', '-'))
-
+        self.setObjectName( "Default text")
+        
 class Window(Fluentwindow):
     """ Main Interface """
 
     def __init__(self):
         super().__init__()
 
-        # Create sub-interfaces, when actually using, replace Widget with your own sub-interface
-        self.homeInterface = Widget('Home Interface', self)
-        self.musicInterface = Widget('Music Interface', self)
-        self.videoInterface = Widget('Video Interface', self)
-        self.settingInterface = Widget('Setting Interface', self)
-        self.albumInterface = Widget('Album Interface', self)
-        self.albumInterface1 = Widget('Album Interface 1', self)
+        self.buttons = ToolButtonDemo()
 
+        # Create sub-interfaces, when actually using, replace Widget with your own sub-interface
+        self.homeInterface = Widget(self)
+        self.musicInterface = Widget(self)
+        self.videoInterface = Widget(self)
+        self.settingInterface = Widget(self)
+        self.albumInterface = Widget(self)
+        self.albumInterface1 = Widget(self)
+
+        self.homeInterface.hBoxLayout.addWidget(self.buttons,Qt.AlignCenter)
         self.initNavigation()
         self.initWindow()
 

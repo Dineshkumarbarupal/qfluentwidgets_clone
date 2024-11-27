@@ -7,15 +7,23 @@ from gui.splash_screen import Splashscreen
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = Window()  # Instantiate your main window
-    splash = Splashscreen(window)
-    splash.show()
+    window.show()
+    # splash = Splashscreen(window)
+    # splash.show()
      
-    QTimer.singleShot(3000, lambda:(
-        splash.splashScreen.finish(),
-        window.show()
-    ))
+    # QTimer.singleShot(3000, lambda:(
+    #     splash.splashScreen.finish(),
+    #     window.show()
+    # ))
 
     sys.exit(app.exec_())  # Start the event loop
+
+
+
+
+
+
+
 
 
 

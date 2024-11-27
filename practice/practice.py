@@ -1,78 +1,41 @@
 # coding:utf-8
 import sys
-from enum import Enum
 
-from PyQt5.QtCore import QLocale
-from PyQt5.QtWidgets import QApplication
-from qfluentwidgets import (qconfig, QConfig, ConfigItem, OptionsConfigItem, BoolValidator,
-                            OptionsValidator, RangeConfigItem, RangeValidator,
-                            FolderListValidator, Theme, FolderValidator, ConfigSerializer, __version__)
+from PyQt5.QtCore import Qt, QCalendar, QDate
+from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout
+
+from qfluentwidgets import CalendarPicker, setTheme, Theme
 
 
-class Language(Enum):
-    """ Language enumeration """
+class Demo(QWidget):
 
-    CHINESE_SIMPLIFIED = QLocale(QLocale.Chinese, QLocale.China)
-    CHINESE_TRADITIONAL = QLocale(QLocale.Chinese, QLocale.HongKong)
-    ENGLISH = QLocale(QLocale.English)
-    AUTO = QLocale()
+    def __init__(self):
+        super().__init__()
+        # setTheme(Theme.DARK)
+        self.setStyleSheet('Demo{background: white}')
 
+        self.picker = CalendarPicker(self)
+        self.picker.dateChanged.connect(print)
 
-class LanguageSerializer(ConfigSerializer):
-    """ Language serializer """
+        # set date
+        # self.picker.setDate(QDate(2023, 5, 30))
 
-    def serialize(self, language):
-        return language.value.name() if language != Language.AUTO else "Auto"
+        # customize date format
+        # self.picker.setDateFormat(Qt.TextDate)
+        # self.picker.setDateFormat('yyyy-M-d')
 
-    def deserialize(self, value: str):
-        return Language(QLocale(value)) if value != "Auto" else Language.AUTO
-
-
-def isWin11():
-    return sys.platform == 'win32' and sys.getwindowsversion().build >= 22000
-
-
-class Config(QConfig):
-    """ Config of application """
-
-    # folders
-    musicFolders = ConfigItem(
-        "Folders", "LocalMusic", [], FolderListValidator())
-    downloadFolder = ConfigItem(
-        "Folders", "Download", "app/download", FolderValidator())
-
-    # main window
-    micaEnabled = ConfigItem("MainWindow", "MicaEnabled", isWin11(), BoolValidator())
-    dpiScale = OptionsConfigItem(
-        "MainWindow", "DpiScale", "Auto", OptionsValidator([1, 1.25, 1.5, 1.75, 2, "Auto"]), restart=True)
-    language = OptionsConfigItem(
-        "MainWindow", "Language", Language.AUTO, OptionsValidator(Language), LanguageSerializer(), restart=True)
-
-    # Material
-    blurRadius  = RangeConfigItem("Material", "AcrylicBlurRadius", 15, RangeValidator(0, 40))
-
-    # software update
-    checkUpdateAtStartUp = ConfigItem("Update", "CheckUpdateAtStartUp", True, BoolValidator())
+        self.hBoxLayout = QHBoxLayout(self)
+        self.hBoxLayout.addWidget(self.picker, 0, Qt.AlignCenter)
+        self.resize(500, 500)
 
 
-YEAR = 2023
-AUTHOR = "zhiyiYo"
-VERSION = __version__
-HELP_URL = "https://qfluentwidgets.com"
-REPO_URL = "https://github.com/zhiyiYo/PyQt-Fluent-Widgets"
-EXAMPLE_URL = "https://github.com/zhiyiYo/PyQt-Fluent-Widgets/tree/master/examples"
-FEEDBACK_URL = "https://github.com/zhiyiYo/PyQt-Fluent-Widgets/issues"
-RELEASE_URL = "https://github.com/zhiyiYo/PyQt-Fluent-Widgets/releases/latest"
-ZH_SUPPORT_URL = "https://qfluentwidgets.com/zh/price/"
-EN_SUPPORT_URL = "https://qfluentwidgets.com/price/"
+if __name__ == '__main__':
+    # enable dpi scale
+    QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
+    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
+    QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
 
-
-cfg = Config()
-cfg.themeMode.value = Theme.AUTO
-qconfig.load('app/config/config.json', cfg)
-
-if __name__=='__main__':
     app = QApplication(sys.argv)
-    w = Language()
+    w = Demo()
     w.show()
-    app.exec()
+    app.exec_()
